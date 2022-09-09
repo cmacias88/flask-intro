@@ -18,7 +18,7 @@ AWESOMENESS = [
 def start_here():
     """Home page."""
 
-    return "<!doctype html><html><a>Hi! This is the home page.</html>"
+    return "<!doctype html><html><div>Hi! This is the home page.</div></html>"
 
 
 @app.route('/hello')
@@ -35,7 +35,6 @@ def say_hello():
         <h1>Hi There!</h1>
         <form action="/greet">
           What's your name? <input type="text" name="person">
-          <input type="submit" value="Submit">
           <label for id="compliment-options">Select any compliment:</label>
           <select name="compliment" id="compliment-options">
           <option value="amazing">Amazing</option>
@@ -52,11 +51,24 @@ def say_hello():
           <option value="wonderful">Wonderful</option>
           <option value="smashing">Smashing</option>
           <option value="lovely">Lovely</option>
+          <input type="submit" value="Submit">
+        </form>
+        <br>
+        <form action="/diss">
+          What's your name? <input type="text" name="person">
+          <label for id="diss-options">Select any diss:</label>
+          <select name="diss" id="diss-options">
+          <option value="awful">Awful</option>
+          <option value="not funny">Not Funny</option>
+          <option value="stinky">Stinky</option>
+          <option value="eh">Eh</option>
+          <input type="submit" value="Submit">
         </form>
       </body>
     </html>
+      </body>
+    </html>
     """
-
 
 @app.route('/greet')
 def greet_person():
@@ -74,6 +86,26 @@ def greet_person():
       </head>
       <body>
         Hi, {player}! I think you're {compliment}!
+      </body>
+    </html>
+    """
+
+@app.route('/diss')
+def diss_person():
+  """Get user by name and diss them."""
+
+  player = request.args.get("person")
+
+  diss = request.args.get("diss")
+
+  return f"""
+    <!doctype html>
+    <html>
+      <head>
+        <title>A Diss</title>
+      </head>
+      <body>
+        Hi, {player}! I think you're {diss}!
       </body>
     </html>
     """
